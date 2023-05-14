@@ -1,0 +1,33 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+
+<%= render 'list', user: @user, book: @book %>
+    <div class='col-md-8 offset-md-1'>
+      <h2>Book detail</h2>
+      <table class="table">
+<!--投稿記事1つの詳細ページ-->
+        <tbody>
+          <tr>
+            <td>
+              <%= image_tag @user.get_profile_image(100,100) %>
+              <p>
+                <%= link_to user_path(@book_show.user.id) do %>
+                <%= @book_show.user.name %>
+                <% end %>
+              </p>
+            </td>
+            <td><%= link_to @book_show.title, book_path(@book_show.id) %></td>
+            <td><%= @book_show.body %></td>
+            <td>
+              <% if @book_show.user == current_user %>
+                <span><%= link_to "Edit", edit_book_path(@book_show.id), class:"btn btn-sm btn-success" %></span>
+                <span><%= link_to "Destroy", book_path(@book_show), method: :delete, "data-confirm" => "本当に消しますか？", class:"btn btn-sm btn-danger" %></span>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
