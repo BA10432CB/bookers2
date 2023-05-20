@@ -1,0 +1,2 @@
+$(".book_comments").remove(); // 対象クラスが付与されている要素を削除する
+$(".book_detail").after("<%= j(render "book_comments/comment_list", book_show: @book_show) %>")
