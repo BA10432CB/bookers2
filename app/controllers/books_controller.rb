@@ -14,8 +14,13 @@ class BooksController < ApplicationController
   end
 
   def index
+    to = Time.current.at_end_of_day
+    from = (to - 6.day).at_beginning_of_day
     @book = Book.new
-    @books = Book.all
+    @books = Book.includes(:favorited_users).
+      sort_by{|x|
+        x.favorited_users.count#.includes(:favorites)
+      }.reverse
     @user = User.find(current_user.id)
   end
 
